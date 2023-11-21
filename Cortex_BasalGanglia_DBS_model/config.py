@@ -17,6 +17,15 @@ pid_schema = dict(
     max_value={"type": "float", "coerce": float},
 )
 
+
+onoff_schema = dict(
+    setpoint={"type": "float", "coerce": float},
+    td={"type": "float", "coerce": float},
+    ts={"type": "float", "coerce": float},
+    min_value={"type": "float", "coerce": float},
+    max_value={"type": "float", "coerce": float},
+)
+
 ift_schema = dict(
     setpoint={"type": "float", "coerce": float},
     kp={"type": "float", "coerce": float},
@@ -50,7 +59,7 @@ class Config(object):
             "type": "string",
             "coerce": (str, lambda x: x.upper()),
             "default": "ZERO",
-            "allowed": ("ZERO", "PID", "IFT", "OPEN"),
+            "allowed": ("ZERO", "PID", "IFT", "OPEN", "OnOff"),
         },
         Modulation={
             "type": "string",
@@ -125,6 +134,8 @@ def get_controller_kwargs(config):
     controller = config.Controller
     if controller == "ZERO":
         schema = zero_schema
+    elif controller == "OnOff":
+        schema = onoff_schema
     elif controller == "PID":
         schema = pid_schema
     elif controller == "IFT":
