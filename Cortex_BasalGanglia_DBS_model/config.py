@@ -20,9 +20,10 @@ pid_schema = dict(
 
 onoff_schema = dict(
     setpoint={"type": "float", "coerce": float},
-    ts={"type": "float", "coerce": float},
     min_value={"type": "float", "coerce": float},
     max_value={"type": "float", "coerce": float},
+    ramp_duration={"type": "float", "coerce": float},
+    ts={"type": "float", "coerce": float},
 )
 
 ift_schema = dict(
